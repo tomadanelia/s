@@ -17,10 +17,17 @@
   display: flex;
   will-change: transform;
 }
-
 .carousel-slide {
-  min-width: 100%;
+  flex: 0 0 80%;         
+  padding: 0 8px;
   box-sizing: border-box;
+  transition: opacity 0.35s, transform 0.35s;
+}
+
+.carousel-slide:not(.active-slide) {
+  opacity: 0.45;
+  transform: scale(0.94);
+  pointer-events: none;
 }
 
 .carousel-empty,
