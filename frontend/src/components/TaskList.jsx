@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import TaskItem from './TaskItem';
-
+import '../styles/TaskList.css';
 export default function TaskList({ tasks, onEdit, onDelete, onToggle }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -39,21 +39,21 @@ export default function TaskList({ tasks, onEdit, onDelete, onToggle }) {
 
   const cloned = [tasks[tasks.length - 1], ...tasks, tasks[0]];
   const clonedIndex = currentIndex + 1;
-  function goNext() {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    const nextIdx = currentIndex + 1;  
-    if (nextIdx >= tasks.length) { 
-      setCurrentIndex(next);
-      timeoutRef.current = setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentIndex(0);
-      }, 300);
-    } else {
-      setCurrentIndex(next);
-      timeoutRef.current = setTimeout(() => setIsTransitioning(false), 300);
-    }
+ function goNext() {
+  if (isTransitioning) return;
+  setIsTransitioning(true);
+  const nextIdx = currentIndex + 1;
+  if (nextIdx >= tasks.length) {
+    setCurrentIndex(nextIdx); 
+    timeoutRef.current = setTimeout(() => {
+      setIsTransitioning(false);
+      setCurrentIndex(0);
+    }, 300);
+  } else {
+    setCurrentIndex(nextIdx); 
+    timeoutRef.current = setTimeout(() => setIsTransitioning(false), 300);
   }
+}
 
   function goPrev() {
     if (isTransitioning) return;
